@@ -28,7 +28,6 @@ warnings.filterwarnings('ignore')
 
 st.set_page_config(
     page_title="Loop Pulse — ML ROI Simulator", 
-    page_icon="🎯", 
     layout="wide",
     initial_sidebar_state="expanded",
 )
@@ -586,7 +585,7 @@ with st.sidebar:
 
     st.divider()
     st.markdown(
-        f"<h3 style='font-family: {FONT_FAMILY}; color: {COLORS['text']};'>⚙️ Data-Discovered Interventions</h3>", 
+        f"<h3 style='font-family: {FONT_FAMILY}; color: {COLORS['text']};'>Data-Discovered Interventions</h3>", 
         unsafe_allow_html=True
     )
 

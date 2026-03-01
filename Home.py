@@ -11,7 +11,6 @@ from plotly.subplots import make_subplots
 
 st.set_page_config(
     page_title="Loop Pulse — Economic Safety Intelligence",
-    page_icon="🎯",
     layout="wide",
     initial_sidebar_state="expanded",
 )
@@ -190,7 +189,7 @@ stats = load_stats()
 # HERO SECTION
 # ============================================================================
 
-st.markdown('<div class="hero-title">🎯 Loop Pulse</div>', unsafe_allow_html=True)
+st.markdown('<div class="hero-title">Loop Pulse</div>', unsafe_allow_html=True)
 st.markdown('<div class="hero-subtitle">Economic Safety Intelligence Platform</div>', unsafe_allow_html=True)
 
 col1, col2, col3, col4 = st.columns(4)

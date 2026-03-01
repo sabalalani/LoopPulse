@@ -318,7 +318,7 @@ def compute_correlations(df):
 # ============================================================================
 
 with st.sidebar:
-    st.markdown("### 🎯 Loop Pulse")
+    st.markdown("### Loop Pulse")
     st.markdown(
         f"<span style='color: {COLORS['muted']}; font-size: {FONT_SIZES['small']}px; "
         f"font-family: {FONT_FAMILY};'>Economic Safety Intelligence</span>", 
@@ -343,7 +343,7 @@ with st.sidebar:
     # ========================================================================
     # TIME PERIOD FILTER
     # ========================================================================
-    st.markdown("**📅 Time Period**")
+    st.markdown("** Time Period**")
     
     # Convert dates to datetime and then to date objects for the slider
     min_date = pd.to_datetime(df['year_month']).min().date()
@@ -377,7 +377,7 @@ with st.sidebar:
     # ========================================================================
     # BLOCK FILTERS
     # ========================================================================
-    st.markdown("**📍 Block Filters**")
+    st.markdown("** Block Filters**")
     
     # Block selector (with search)
     all_blocks = sorted(df['block_id'].unique())
@@ -419,7 +419,7 @@ with st.sidebar:
     # ========================================================================
     # CRIME TYPE FILTERS
     # ========================================================================
-    st.markdown("**🔫 Crime Filters**")
+    st.markdown("** Crime Filters**")
     
     # Crime severity filter
     crime_severity = st.select_slider(
@@ -452,7 +452,7 @@ with st.sidebar:
     # ========================================================================
     # BUSINESS HEALTH FILTERS
     # ========================================================================
-    st.markdown("**🏥 Business Health Filters**")
+    st.markdown("** Business Health Filters**")
     
     # BHS range filter
     bhs_range = st.slider(
@@ -478,7 +478,7 @@ with st.sidebar:
     # ========================================================================
     # INFRASTRUCTURE FILTERS
     # ========================================================================
-    st.markdown("**🔧 Infrastructure Filters**")
+    st.markdown("** Infrastructure Filters**")
     
     with st.expander("Infrastructure issues", expanded=False):
         min_311 = st.number_input("Min 311 requests", min_value=0, value=0, key="min_311")
@@ -490,7 +490,7 @@ with st.sidebar:
     # ========================================================================
     # ADVANCED FILTERS (Collapsible)
     # ========================================================================
-    with st.expander("⚙️ Advanced Filters", expanded=False):
+    with st.expander("Advanced Filters", expanded=False):
         # Transit proximity
         transit_dist = st.slider(
             "Max distance to CTA (meters)",
@@ -525,7 +525,7 @@ with st.sidebar:
     # ========================================================================
     # DATA SOURCES (Collapsible)
     # ========================================================================
-    with st.expander("📊 Data Sources", expanded=False):
+    with st.expander("Data Sources", expanded=False):
         st.markdown("""
         - [Chicago Crime Data](https://data.cityofchicago.org/Public-Safety/Crimes-2001-to-Present/ijzp-q8t2)
         - [Business Licenses](https://data.cityofchicago.org/Community-Economic-Development/Business-Licenses/r5kz-chrr)
@@ -538,7 +538,7 @@ with st.sidebar:
     # ========================================================================
     # BHS FORMULA (Always visible)
     # ========================================================================
-    st.markdown("**📐 BHS Formula Components**")
+    st.markdown("**BHS Formula Components**")
     st.markdown("""
     - **Economic Vitality**
       - Active business presence
@@ -971,7 +971,7 @@ with tab2:
     )
 
     st.plotly_chart(fig_trends, use_container_width=True)
-    st.caption("📈 Trends for major crime categories over the analysis period")
+    st.caption("Trends for major crime categories over the analysis period")
 
     col1, col2 = st.columns(2)
 
@@ -1130,7 +1130,7 @@ with tab3:
     )
 
     st.plotly_chart(fig_bhs, use_container_width=True)
-    st.caption("📈 Average Business Health Score trend (higher = better)")
+    st.caption("Average Business Health Score trend (higher = better)")
 
     col1, col2 = st.columns(2)
 
