@@ -70,11 +70,11 @@ with st.sidebar:
     date_range = st.date_input("Date Range", [min_date, max_date], min_value=min_date, max_value=max_date)
     
     # 2. Transit Proximity Filter
-    max_dist = int(df['dist_to_nearest_cta'].max())
-    transit_limit = st.slider("Max Distance to CTA (m)", 0, max_dist, max_dist)
+    #max_dist = int(df['dist_to_nearest_cta'].max())
+    #transit_limit = st.slider("Max Distance to CTA (m)", 0, max_dist, max_dist)
     
     # 3. Crime Volume Filter
-    crime_limit = st.slider("Max Monthly Crimes", 0, int(df['total_crimes'].max()), int(df['total_crimes'].max()))
+    #crime_limit = st.slider("Max Monthly Crimes", 0, int(df['total_crimes'].max()), int(df['total_crimes'].max()))
 
     # Apply Filters to the Dataframe
     if len(date_range) == 2:
@@ -83,8 +83,8 @@ with st.sidebar:
     else:
         filtered_df = df.copy()
     
-    filtered_df = filtered_df[filtered_df['dist_to_nearest_cta'] <= transit_limit]
-    filtered_df = filtered_df[filtered_df['total_crimes'] <= crime_limit]
+    #filtered_df = filtered_df[filtered_df['dist_to_nearest_cta'] <= transit_limit]
+    #filtered_df = filtered_df[filtered_df['total_crimes'] <= crime_limit]
     
     # Block Selection (Filtered by the sliders above)
     available_blocks = sorted(filtered_df['block_id'].unique())
