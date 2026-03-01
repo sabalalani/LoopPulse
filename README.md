@@ -4,7 +4,7 @@
 
 Loop Pulse is an economic safety intelligence platform that connects public safety data with economic vitality in Chicago's Loop. The platform quantifies the economic ripple effects of safety issues and identifies where targeted interventions would generate the highest return on investment.
 
-## 📊 Dashboard Suite
+## Dashboard Suite
 
 ### 1. Economic Impact Dashboard (`Visualization.py`)
 Interactive visualization of the Loop Pulse feature-engineered dataset, including:
@@ -28,13 +28,13 @@ Role-based views tailored to different users:
 - **Business Owners**: Block trends & competitive positioning
 - **Developers**: Investment opportunity zones & growth forecasts
 
-## 📋 Prerequisites
+## Prerequisites
 
 - Python 3.8 or higher
 - pip package manager
 - Your data file: `loop_pulse_features2.csv`
 
-## 🚀 Installation
+## Installation
 
 1. **Clone or download this repository**
    ```bash
