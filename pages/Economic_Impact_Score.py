@@ -830,7 +830,7 @@ with tab1:
                 },
                 'y': 0.98,  # Move title down slightly
                 'x': 0.5,
-                'xanchor': 'center',
+                'xanchor': 'left',
                 'yanchor': 'top'
             },
             height=400,
