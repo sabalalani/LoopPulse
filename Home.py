@@ -209,7 +209,7 @@ st.markdown('<div class="custom-divider"></div>', unsafe_allow_html=True)
 # EXECUTIVE SUMMARY
 # ============================================================================
 
-st.markdown("## 📋 Executive Summary")
+st.markdown("## Executive Summary")
 col1, col2 = st.columns([2, 1])
 
 with col1:
@@ -258,13 +258,12 @@ st.markdown('<div class="custom-divider"></div>', unsafe_allow_html=True)
 # FEATURE SHOWCASE
 # ============================================================================
 
-st.markdown("## 🚀 Our Solution")
+st.markdown("## Our Solution")
 col1, col2, col3 = st.columns(3)
 
 with col1:
     st.markdown(f"""
     <div class='feature-card'>
-        <div class='feature-icon'>📊</div>
         <div class='feature-title'>Economic Impact Heatmap</div>
         <div class='feature-description'>
             Interactive block-level map overlaying crime incidents with business density. 
@@ -276,7 +275,6 @@ with col1:
 with col2:
     st.markdown(f"""
     <div class='feature-card'>
-        <div class='feature-icon'>🎯</div>
         <div class='feature-title'>Intervention ROI Simulator</div>
         <div class='feature-description'>
             ML-powered what-if analysis. Model proposed changes (e.g., streetlights or grants) and 
@@ -288,7 +286,6 @@ with col2:
 with col3:
     st.markdown(f"""
     <div class='feature-card'>
-        <div class='feature-icon'>🔑</div>
         <div class='feature-title'>Stakeholder Insights Portal</div>
         <div class='feature-description'>
             Tailored 4-dimension views for <strong>Aldermen, Business Owners, and Developers</strong>. 
@@ -305,15 +302,14 @@ st.markdown('<div class="custom-divider"></div>', unsafe_allow_html=True)
 
 st.markdown(f"""
 <div class='nav-hint'>
-    <div class='nav-hint-arrow'>👈</div>
     <h3 style='color: {COLORS['text']}; margin-top: 1rem;'>Ready to explore?</h3>
     <p style='color: {COLORS['muted']}; font-size: {FONT_SIZES['body']}px; max-width: 600px; margin: 1rem auto;'>
         Use the <strong style='color: {COLORS['blue']};'>sidebar on the left</strong> to navigate:
     </p>
     <div style='display: flex; justify-content: center; gap: 1.5rem; margin-top: 1.5rem; flex-wrap: wrap;'>
-        <div style='background-color: {COLORS['bg']}; padding: 0.75rem 1.5rem; border-radius: 50px; border: 1px solid {COLORS['border']}; color: {COLORS['text']};'>📊 Economic Impact</div>
-        <div style='background-color: {COLORS['bg']}; padding: 0.75rem 1.5rem; border-radius: 50px; border: 1px solid {COLORS['border']}; color: {COLORS['text']};'>🎯 ROI Simulator</div>
-        <div style='background-color: {COLORS['bg']}; padding: 0.75rem 1.5rem; border-radius: 50px; border: 1px solid {COLORS['border']}; color: {COLORS['text']};'>🔑 Stakeholder Portal</div>
+        <div style='background-color: {COLORS['bg']}; padding: 0.75rem 1.5rem; border-radius: 50px; border: 1px solid {COLORS['border']}; color: {COLORS['text']};'>Economic Impact</div>
+        <div style='background-color: {COLORS['bg']}; padding: 0.75rem 1.5rem; border-radius: 50px; border: 1px solid {COLORS['border']}; color: {COLORS['text']};'>ROI Simulator</div>
+        <div style='background-color: {COLORS['bg']}; padding: 0.75rem 1.5rem; border-radius: 50px; border: 1px solid {COLORS['border']}; color: {COLORS['text']};'>Stakeholder Portal</div>
     </div>
 </div>
 """, unsafe_allow_html=True)

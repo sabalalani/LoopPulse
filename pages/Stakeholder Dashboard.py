@@ -102,7 +102,7 @@ with st.sidebar:
 # ============================================================================
 # HEADER
 # ============================================================================
-st.title(f"🔑 {role} View")
+st.title(f"{role} View")
 st.markdown(f"Tailored intelligence for **{selected_block}** | Analyzing {len(block_history)} months of filtered data")
 
 # ============================================================================
@@ -111,7 +111,7 @@ st.markdown(f"Tailored intelligence for **{selected_block}** | Analyzing {len(bl
 if role == "City Official / Alderman":
     col1, col2 = st.columns(2)
     with col1:
-        st.subheader("🏛️ Policy Performance")
+        st.subheader("Policy Performance")
         st.markdown(f"""
         <div class="stakeholder-card">
             <div class="metric-label">Public Safety Efficiency</div>
@@ -126,19 +126,19 @@ if role == "City Official / Alderman":
         st.write(f"Focus: Block {selected_block} is showing a {block_history['total_311_requests'].corr(block_history['total_crimes']):.2f} correlation between infrastructure reports and safety incidents.")
 
     with col2:
-        st.subheader("📡 Infrastructure vs. Safety (Scatter)")
+        st.subheader("Infrastructure vs. Safety (Scatter)")
         fig1 = px.scatter(block_history, x="total_311_requests", y="total_crimes", trendline="ols", color_discrete_sequence=[COLORS['orange']])
         fig1.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', font_color="white", height=300)
         st.plotly_chart(fig1, use_container_width=True)
 
     col3, col4 = st.columns(2)
     with col3:
-        st.subheader("📈 Historical Crime Volatility")
+        st.subheader("Historical Crime Volatility")
         fig2 = px.line(block_history, x="year_month_dt", y="total_crimes", color_discrete_sequence=[COLORS['red']])
         fig2.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', font_color="white", height=300)
         st.plotly_chart(fig2, use_container_width=True)
     with col4:
-        st.subheader("⚖️ Arrest Rate Benchmark")
+        st.subheader("Arrest Rate Benchmark")
         fig3 = go.Figure(go.Bar(x=['This Block', 'Loop Avg'], y=[block_data['arrest_rate'], loop_avg_arrest], marker_color=[COLORS['blue'], COLORS['muted']]))
         fig3.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', font_color="white", height=300)
         st.plotly_chart(fig3, use_container_width=True)
@@ -149,7 +149,7 @@ if role == "City Official / Alderman":
 elif role == "Business Owner":
     col1, col2 = st.columns(2)
     with col1:
-        st.subheader("🕒 Environment Radar")
+        st.subheader("Environment Radar")
         fig1 = go.Figure(go.Scatterpolar(r=[block_data['active_business_count'], (1 - block_data['night_crime_ratio']) * 100, 
                block_data['business_diversity_index'] * 100, block_data['business_health_score']],
             theta=['Density','Safety','Diversity','Health'], fill='toself', line_color=COLORS['cyan']))
@@ -157,7 +157,7 @@ elif role == "Business Owner":
         st.plotly_chart(fig1, use_container_width=True)
 
     with col2:
-        st.subheader("🛠️ Action Center")
+        st.subheader("Action Center")
         st.markdown(f"""
         <div class="stakeholder-card">
             <div class="metric-label">Competitor Density</div>
@@ -172,12 +172,12 @@ elif role == "Business Owner":
 
     col3, col4 = st.columns(2)
     with col3:
-        st.subheader("📉 12-Month Health Stability")
+        st.subheader("12-Month Health Stability")
         fig2 = px.area(block_history.tail(12), x="year_month_dt", y="business_health_score", color_discrete_sequence=[COLORS['green']])
         fig2.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', font_color="white", height=300)
         st.plotly_chart(fig2, use_container_width=True)
     with col4:
-        st.subheader("🚨 Primary Crime Drivers")
+        st.subheader("Primary Crime Drivers")
         crime_mix = block_data[['theft_count', 'violent_crime_count', 'property_crime_count']]
         fig3 = px.bar(crime_mix, color_discrete_sequence=[COLORS['red']])
         fig3.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', font_color="white", height=300, showlegend=False)
@@ -189,26 +189,26 @@ elif role == "Business Owner":
 elif role == "Real Estate Developer":
     col1, col2 = st.columns(2)
     with col1:
-        st.subheader("🏗️ Investment Growth Curve")
+        st.subheader("Investment Growth Curve")
         fig1 = make_subplots(specs=[[{"secondary_y": True}]])
         fig1.add_trace(go.Scatter(x=block_history['year_month_dt'], y=block_history['business_health_score'], name="Health", line=dict(color=COLORS['green'])), secondary_y=False)
         fig1.add_trace(go.Bar(x=block_history['year_month_dt'], y=block_history['net_business_change'], name="Growth", marker_color=COLORS['blue'], opacity=0.4), secondary_y=True)
         fig1.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', font_color="white", height=300, showlegend=False)
         st.plotly_chart(fig1, use_container_width=True)
     with col2:
-        st.subheader("💎 Yield Matrix (Health vs Crime)")
+        st.subheader("Yield Matrix (Health vs Crime)")
         fig2 = px.scatter(block_history, x="crimes_per_business", y="business_health_score", size="active_business_count", color="business_health_score", color_continuous_scale="RdYlGn")
         fig2.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', font_color="white", height=300, coloraxis_showscale=False)
         st.plotly_chart(fig2, use_container_width=True)
 
     col3, col4 = st.columns(2)
     with col3:
-        st.subheader("🚉 Transit Ridership Trends")
+        st.subheader("Transit Ridership Trends")
         fig3 = px.line(block_history, x="year_month_dt", y="cta_total_loop_ridership", color_discrete_sequence=[COLORS['cyan']])
         fig3.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', font_color="white", height=300)
         st.plotly_chart(fig3, use_container_width=True)
     with col4:
-        st.subheader("🏗️ Development Context")
+        st.subheader("Development Context")
         st.markdown(f"""
         <div class="stakeholder-card">
             <div class="metric-label">CTA Proximity</div>

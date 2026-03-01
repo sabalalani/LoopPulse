@@ -330,7 +330,7 @@ with st.sidebar:
     # DATASET INFO (Always visible)
     # ========================================================================
     st.markdown(
-        f"**📊 Dataset Snapshot**",
+        f"**Dataset Snapshot**",
         help="Overview of the current dataset"
     )
     st.markdown(f"""
@@ -705,13 +705,13 @@ filtered_correlations = compute_correlations(filtered_df)
 
 # Show filter summary in sidebar
 if len(filtered_df) < len(df):
-    st.sidebar.info(f"📊 Showing {len(filtered_df):,} of {len(df):,} records ({len(filtered_df)/len(df)*100:.1f}%)")
+    st.sidebar.info(f"Showing {len(filtered_df):,} of {len(df):,} records ({len(filtered_df)/len(df)*100:.1f}%)")
 
 # ============================================================================
 # HEADER
 # ============================================================================
 
-st.markdown(f"<h2 style='font-family: {FONT_FAMILY}; color: {COLORS['text']};'>📊 Economic Impact Dashboard</h2>", 
+st.markdown(f"<h2 style='font-family: {FONT_FAMILY}; color: {COLORS['text']};'>Economic Impact Dashboard</h2>", 
     unsafe_allow_html=True)
 st.markdown(
     f"<span style='color: {COLORS['muted']}; font-size: {FONT_SIZES['body']}px; "
@@ -727,7 +727,7 @@ st.divider()
 # TABS
 # ============================================================================
 
-tab1, tab2, tab3, tab4, tab5 = st.tabs(["📈 Overview", "🔫 Crime Trends", "🏥 Business Health", "🔗 Correlations", "📍 Top Blocks"])
+tab1, tab2, tab3, tab4, tab5 = st.tabs(["Overview", "Crime Trends", "Business Health", "Correlations", "Top Blocks"])
 
 # ============================================================================
 # TAB 1: OVERVIEW
@@ -801,7 +801,7 @@ with tab1:
         )
         fig.update_yaxes(range=[25, 45], secondary_y=True)
         st.plotly_chart(fig, use_container_width=True)
-        st.caption("📊 Left axis (blue bars): Total monthly crimes | Right axis (green line): Average Business Health Score")
+        st.caption("Left axis (blue bars): Total monthly crimes | Right axis (green line): Average Business Health Score")
 
     with col2:
         crime_types = {
@@ -816,22 +816,25 @@ with tab1:
             names=list(crime_types.keys()),
             values=list(crime_types.values()),
             color_discrete_sequence=[COLORS["blue"], COLORS["red"], COLORS["orange"],
-                                     COLORS["purple"], COLORS["cyan"], COLORS["pink"]],
+                                    COLORS["purple"], COLORS["cyan"], COLORS["pink"]],
             hole=0.45,
         )
+        
+        # Create a copy of PLOT_LAYOUT and update its margin
+        pie_layout = PLOT_LAYOUT.copy()
+        pie_layout['margin'] = dict(l=0, r=120, t=50, b=0)  # Override margin
+        
         fig_pie.update_layout(
-            **PLOT_LAYOUT, 
+            **pie_layout,
             title={
                 'text': "Crime Type Distribution",
                 'font': {
                     'family': FONT_FAMILY, 
                     'size': FONT_SIZES["heading"],
-                    'color': COLORS["text"]  # Added title color
+                    'color': COLORS["text"]
                 },
-               # 'y': 0.98,  # Move title down slightly
-               # 'x': 0.5,
-               # 'xanchor': 'right',
-               # 'yanchor': 'top'
+                'x': 0,  # Left-align title
+                'xanchor': 'left'
             },
             height=400,
             showlegend=True,
@@ -840,17 +843,24 @@ with tab1:
                 bordercolor=COLORS["border"],
                 borderwidth=1,
                 font=dict(family=FONT_FAMILY, size=FONT_SIZES["small"], color=COLORS["text"]),
-                orientation="h",
-                yanchor="bottom",
-                y=1.15,
-                xanchor="center",
-                x=0.5
-            )#,
-            #margin=dict(t=80)
+                orientation="v",  # Vertical legend
+                yanchor="middle",
+                y=0.5,
+                xanchor="left",
+                x=1.1,  # Position legend to the right of the chart
+                traceorder="normal"
+            )
+        )
+        
+        # Update traces to show percentages on the chart
+        fig_pie.update_traces(
+            textposition='inside',
+            textinfo='percent',
+            insidetextorientation='radial'
         )
 
         st.plotly_chart(fig_pie, use_container_width=True)
-        st.caption("📊 Distribution of crime types across filtered data")
+        st.caption("Distribution of crime types across filtered data")
 
     col3, col4 = st.columns(2)
 
@@ -887,7 +897,7 @@ with tab1:
             )
         )
         st.plotly_chart(fig_cta, use_container_width=True)
-        st.caption("📊 Monthly CTA ridership volume in the Loop area")
+        st.caption("Monthly CTA ridership volume in the Loop area")
 
     with col4:
         fig_311 = go.Figure()
@@ -921,7 +931,7 @@ with tab1:
             )
         )
         st.plotly_chart(fig_311, use_container_width=True)
-        st.caption("📊 Monthly 311 service requests and graffiti reports")
+        st.caption("Monthly 311 service requests and graffiti reports")
 
 # ============================================================================
 # TAB 2: CRIME TRENDS
@@ -1002,7 +1012,7 @@ with tab2:
         )
 
         st.plotly_chart(fig_cb, use_container_width=True)
-        st.caption("📊 Relationship between crime volume and active business count")
+        st.caption("Relationship between crime volume and active business count")
 
     with col2:
         fig_sl = make_subplots(specs=[[{"secondary_y": True}]])
@@ -1041,7 +1051,7 @@ with tab2:
         )
 
         st.plotly_chart(fig_sl, use_container_width=True)
-        st.caption("📊 Streetlight maintenance issues compared to crime trends")
+        st.caption("Streetlight maintenance issues compared to crime trends")
 
     # Year-over-year comparison
     st.markdown(f"<h3 style='font-family: {FONT_FAMILY}; color: {COLORS['text']};'>Year-over-Year Comparison</h3>", 
@@ -1152,7 +1162,7 @@ with tab3:
             )
         )
         st.plotly_chart(fig_scatter, use_container_width=True)
-        st.caption("📊 Correlation between transit ridership and business health")
+        st.caption("Correlation between transit ridership and business health")
 
     with col2:
         covid = filtered_monthly[(filtered_monthly["year_month_dt"] >= "2019-01-01") & (filtered_monthly["year_month_dt"] <= "2021-06-01")]
@@ -1189,7 +1199,7 @@ with tab3:
             )
             fig_covid.update_yaxes(range=[28, 42], secondary_y=True)
             st.plotly_chart(fig_covid, use_container_width=True)
-            st.caption("📊 COVID-19 pandemic period analysis: crime vs business health")
+            st.caption("COVID-19 pandemic period analysis: crime vs business health")
         else:
             st.info("No data available for COVID period with current filters")
 
@@ -1217,7 +1227,7 @@ with tab3:
         )
     )
     st.plotly_chart(fig_hist, use_container_width=True)
-    st.caption("📊 Frequency distribution of BHS values across all blocks and months")
+    st.caption("Frequency distribution of BHS values across all blocks and months")
 
 # ============================================================================
 # TAB 4: CORRELATIONS
@@ -1264,11 +1274,11 @@ with tab4:
         fig_corr.update_yaxes(tickfont=dict(family=FONT_FAMILY, size=FONT_SIZES["small"]))
 
         st.plotly_chart(fig_corr, use_container_width=True)
-        st.caption("📊 Positive values (green) indicate features that boost BHS, negative (red) indicate features that reduce BHS")
+        st.caption("Positive values (green) indicate features that boost BHS, negative (red) indicate features that reduce BHS")
 
         st.markdown(f"""
         <div style="background: #111827; border: 1px solid #1e293b; border-radius: 12px; padding: 24px; margin-top: 8px; font-family: {FONT_FAMILY};">
-            <h4 style="color: #e2e8f0; margin-bottom: 12px; font-family: {FONT_FAMILY};">🔑 Key Insights</h4>
+            <h4 style="color: #e2e8f0; margin-bottom: 12px; font-family: {FONT_FAMILY};">Key Insights</h4>
             <ul style="color: #94a3b8; line-height: 2; font-family: {FONT_FAMILY};">
                 <li><strong style="color: {COLORS['green']};">Business diversity</strong> — Strongest predictor. Blocks with varied business types have higher BHS.</li>
                 <li><strong style="color: {COLORS['green']};">Active business count</strong> — More businesses = higher BHS, as expected.</li>
@@ -1281,7 +1291,7 @@ with tab4:
 
         st.markdown(f"<h4 style='font-family: {FONT_FAMILY}; color: {COLORS['text']};'>Full Feature Correlation Heatmap</h4>", 
     unsafe_allow_html=True)
-        st.caption("📊 Matrix showing correlations between all pairs of features (darker green = stronger positive, darker red = stronger negative)")
+        st.caption("Matrix showing correlations between all pairs of features (darker green = stronger positive, darker red = stronger negative)")
         
         heatmap_features = [
             "total_crimes", "violent_crime_count", "theft_count", "property_crime_count",
@@ -1446,7 +1456,7 @@ with tab5:
         )
 
         st.plotly_chart(fig_blocks, use_container_width=True)
-        st.caption("📊 Top 10 blocks by crime volume: comparing crime counts (red) with Business Health Scores (green)")
+        st.caption("Top 10 blocks by crime volume: comparing crime counts (red) with Business Health Scores (green)")
 
         # Add interpretation text below the chart
         col1, col2, col3 = st.columns(3)
@@ -1470,7 +1480,7 @@ with tab5:
         with col3:
             st.markdown(f"""
             <div style='background-color: {COLORS["surface"]}; padding: 10px; border-radius: 5px; border-left: 4px solid {COLORS["blue"]}; font-family: {FONT_FAMILY};'>
-                <h5 style='margin:0; color: {COLORS["blue"]}; font-family: {FONT_FAMILY};'>📊 Interpretation</h5>
+                <h5 style='margin:0; color: {COLORS["blue"]}; font-family: {FONT_FAMILY};'>Interpretation</h5>
                 <small style='color: {COLORS["muted"]}; font-family: {FONT_FAMILY};'>Blocks with high crime often show lower BHS</small>
             </div>
             """, unsafe_allow_html=True)
@@ -1511,10 +1521,10 @@ with tab5:
                 )
             )
             st.plotly_chart(fig_scatter2, use_container_width=True)
-            st.caption("📊 Each point represents a block: X-axis = businesses, Y-axis = crimes, Color = violent crime level, Size = BHS")
+            st.caption("Each point represents a block: X-axis = businesses, Y-axis = crimes, Color = violent crime level, Size = BHS")
 
         # Map
-        st.markdown(f"<h3 style='font-family: {FONT_FAMILY}; color: {COLORS['text']};'>🗺️ Crime Burden Map</h3>", 
+        st.markdown(f"<h3 style='font-family: {FONT_FAMILY}; color: {COLORS['text']};'>Crime Burden Map</h3>", 
     unsafe_allow_html=True)
         valid_blocks = filtered_top_blocks.dropna(subset=["lat", "lon"])
         if len(valid_blocks) > 0:
@@ -1547,10 +1557,10 @@ with tab5:
                 font=dict(family=FONT_FAMILY, color="#e2e8f0"),
             )
             st.plotly_chart(fig_map, use_container_width=True)
-            st.caption("🗺️ Geographic distribution: Green = healthier blocks, Red = struggling blocks. Larger circles = higher crime density per business")
+            st.caption("Geographic distribution: Green = healthier blocks, Red = struggling blocks. Larger circles = higher crime density per business")
 
         # Data table
-        st.markdown(f"<h3 style='font-family: {FONT_FAMILY}; color: {COLORS['text']};'>📋 Block Details</h3>", 
+        st.markdown(f"<h3 style='font-family: {FONT_FAMILY}; color: {COLORS['text']};'>Block Details</h3>", 
     unsafe_allow_html=True)
         st.caption("Detailed metrics for top 30 blocks (sorted by crime volume)")
         display_cols = ["block_id", "total_crimes", "avg_crimes_per_biz", "avg_bhs", "avg_businesses", "avg_violent_ratio", "avg_night_ratio"]
@@ -1583,4 +1593,4 @@ with tab5:
 # ============================================================================
 
 st.divider()
-st.caption("🔄 Hover over any chart for detailed values | Use filters in sidebar to explore specific segments")
+st.caption("Hover over any chart for detailed values | Use filters in sidebar to explore specific segments")

@@ -90,7 +90,7 @@ st.markdown(f"""
     
     /* Light sidebar ONLY */
     section[data-testid="stSidebar"] {{
-        background-color: #ffffff !important;
+        background-color: #f0f2f6 !important;
         border-right: 1px solid #e5e7eb !important;
     }}
     
@@ -327,7 +327,7 @@ def load_model():
 # ============================================================================
 # ULTRA-OPTIMIZED DATA LOADING WITH CHUNKING
 # ============================================================================
-@st.cache_data(ttl=3600, show_spinner="⚡ Loading & optimizing 25 years of data...")
+@st.cache_data(ttl=3600, show_spinner="Loading & optimizing 25 years of data...")
 def load_optimized_data():
     chunks = []
     try:
@@ -351,7 +351,7 @@ def load_optimized_data():
 # ============================================================================
 # TRAIN OR LOAD MODEL
 # ============================================================================
-@st.cache_resource(show_spinner="🧠 Loading AI Digital Twin...")
+@st.cache_resource(show_spinner="Loading AI Digital Twin...")
 def get_digital_twin(_df):
     """Load existing model or train new one"""
     
@@ -433,7 +433,7 @@ def get_digital_twin(_df):
             calculated_cost = max(500, min(100000, int(ui_info["base_cost"] * cost_multiplier)))
 
             interventions[feature] = {
-                'name': ui_info["name"], 'icon': '⚡', 'unit': ui_info["unit"],
+                'name': ui_info["name"], 'unit': ui_info["unit"],
                 'description': f"Data shows top-tier blocks have {abs(gap[feature]):.1f} {'more' if gap[feature] > 0 else 'less'} {feature.replace('_', ' ')}.",
                 'direction': direction,
                 'impact_per_unit': abs(gap[feature]) * 0.15 * impact_sign,
@@ -535,18 +535,10 @@ except Exception as e:
 # HEADER
 # ============================================================================
 st.markdown(
-    f"<h2 style='font-family: {FONT_FAMILY}; color: {COLORS['text']}; margin-bottom: 0;'>🎯 AI-Driven Intervention ROI Simulator</h2>", 
+    f"<h2 style='font-family: {FONT_FAMILY}; color: {COLORS['text']};'>AI-Driven Intervention ROI Simulator</h2>", 
     unsafe_allow_html=True
 )
-st.markdown(
-    f"<span style='color:{COLORS['muted']};font-size:{FONT_SIZES['body']}px;font-family:{FONT_FAMILY};'>"
-    f"📊 {len(df):,} records • 🔍 {len(features)} dynamic features • "
-    f"🎯 Model R²: {train_r2:.3f} (Adj: {train_adj_r2:.3f}) • "
-    f"5-CV R²: {cv_mean:.3f}±{cv_std:.3f} (Adj: {cv_adj_mean:.3f}±{cv_adj_std:.3f}) • "
-    f"💰 Costs & impacts learned from K-Means gaps"
-    f"</span>",
-    unsafe_allow_html=True
-)
+
 st.divider()
 
 # ============================================================================
@@ -612,7 +604,7 @@ with st.sidebar:
         for key, inv in interventions.items():
             with st.container():
                 st.markdown(
-                    f"<div style='color: {COLORS['text']}; font-weight: 600; margin-bottom: 5px;'>{inv['icon']} {inv['name']}</div>", 
+                    f"<div style='color: {COLORS['text']}; font-weight: 600; margin-bottom: 5px;'>{inv['name']}</div>", 
                     unsafe_allow_html=True
                 )
                 
@@ -724,7 +716,7 @@ if config:
 
     # RESULTS
     st.markdown(
-        f"<h3 style='font-family: {FONT_FAMILY}; color: {COLORS['text']};'>📊 Machine Learning Projection for <span style='color: {COLORS['blue']};'>{selected_block}</span></h3>", 
+        f"<h3 style='font-family: {FONT_FAMILY}; color: {COLORS['text']};'>Machine Learning Projection for <span style='color: {COLORS['blue']};'>{selected_block}</span></h3>", 
         unsafe_allow_html=True
     )
 
@@ -745,9 +737,9 @@ if config:
     # Add additional economic metrics
     st.markdown(
         f"<div class='info-box'>"
-        f"<span style='color: {COLORS['text']}; font-weight: 600;'>💵 Annual Economic Benefit: </span>"
+        f"<span style='color: {COLORS['text']}; font-weight: 600;'>Annual Economic Benefit: </span>"
         f"<span style='color: {COLORS['green']}; font-size: 20px; font-weight: 700;'>${annual_bhs_value:,.0f}</span><br>"
-        f"<span style='color: {COLORS['text']}; font-weight: 600;'>⏱️ Payback Period: </span>"
+        f"<span style='color: {COLORS['text']}; font-weight: 600;'>Payback Period: </span>"
         f"<span style='color: {COLORS['orange']}; font-size: 18px; font-weight: 600;'>{payback_years:.1f} years</span>"
         f"</div>",
         unsafe_allow_html=True
@@ -843,7 +835,7 @@ if config:
         )
         st.plotly_chart(fig2, use_container_width=True)
 
-    with st.expander("📊 Model Feature Importance", expanded=True):
+    with st.expander("Model Feature Importance", expanded=True):
         fig_imp = px.bar(
             importance.head(10), 
             x='importance', 
@@ -866,10 +858,10 @@ if config:
         st.plotly_chart(fig_imp, use_container_width=True)
 
 else:
-    st.info("👈 Select interventions from the sidebar to run the simulation")
+    st.info("Select interventions from the sidebar to run the simulation")
     
     st.markdown(
-        f"<h3 style='font-family: {FONT_FAMILY}; color: {COLORS['text']};'>📋 Auto-Discovered Interventions</h3>", 
+        f"<h3 style='font-family: {FONT_FAMILY}; color: {COLORS['text']};'>Auto-Discovered Interventions</h3>", 
         unsafe_allow_html=True
     )
     st.markdown(
@@ -882,20 +874,19 @@ else:
     for i, (key, inv) in enumerate(list(interventions.items())[:6]):
         with cols[i % 3]:
             st.markdown(f"""
-            <div class='intervention-card'>
-                <div style='font-size:28px; margin-bottom:10px;'>{inv['icon']}</div>
-                <h4 style='color:{COLORS['text']}; margin:0 0 10px 0;'>{inv['name']}</h4>
-                <p style='color:{COLORS['muted']};font-size:13px;'>{inv['description']}</p>
-                <div style='display:flex; justify-content:space-between; align-items:center; margin-top:15px;'>
-                    <span style='color:{COLORS['orange']};font-size:12px;'>💰 ${inv['cost']:,.0f} per {inv['unit']}</span>
-                    <span style='color:{COLORS['blue']};font-size:12px;'>Max: {inv['max_qty']}</span>
+                <div class='intervention-card'>
+                    <h4 style='color:{COLORS['text']}; margin:0 0 10px 0;'>{inv['name']}</h4>
+                    <p style='color:{COLORS['muted']};font-size:13px;'>{inv['description']}</p>
+                    <div style='display:flex; justify-content:space-between; align-items:center; margin-top:15px;'>
+                        <span style='color:{COLORS['orange']};font-size:12px;'>${inv['cost']:,.0f} per {inv['unit']}</span>
+                        <span style='color:{COLORS['blue']};font-size:12px;'>Max: {inv['max_qty']}</span>
+                    </div>
                 </div>
-            </div>
-            """, unsafe_allow_html=True)
+                """, unsafe_allow_html=True)
 
 # ============================================================================
 # FOOTER
 # ============================================================================
 
 st.divider()
-st.caption("🔄 Hover over charts for detailed values | All impacts and costs learned from historical data patterns | Model saved to disk for faster loading")
+st.caption("Hover over charts for detailed values | All impacts and costs learned from historical data patterns | Model saved to disk for faster loading")
