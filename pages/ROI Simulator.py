@@ -545,7 +545,7 @@ st.divider()
 # ============================================================================
 with st.sidebar:
     st.markdown(
-        f"<h3 style='font-family: {FONT_FAMILY}; color: {COLORS['text']}; margin-bottom: 10px;'>📍 Target Block</h3>", 
+        f"<h3 style='font-family: {FONT_FAMILY}; color: {COLORS['text']}; margin-bottom: 10px;'>Target Block</h3>", 
         unsafe_allow_html=True
     )
     
