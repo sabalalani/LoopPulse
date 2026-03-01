@@ -6,3 +6,4 @@ scikit-learn
 python-dateutil
 pytz
 joblib
+matplotlib
