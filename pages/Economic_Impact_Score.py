@@ -828,8 +828,8 @@ with tab1:
                     'size': FONT_SIZES["heading"],
                     'color': COLORS["text"]  # Added title color
                 },
-                'y': 0.98,  # Move title down slightly
-                'x': 0.5,
+               # 'y': 0.98,  # Move title down slightly
+               # 'x': 0.5,
                # 'xanchor': 'right',
                # 'yanchor': 'top'
             },
