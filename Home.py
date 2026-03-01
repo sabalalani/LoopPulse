@@ -63,6 +63,33 @@ st.markdown(f"""
         font-family: {FONT_FAMILY};
     }}
     
+    /* Sidebar styling - match main background */
+    section[data-testid="stSidebar"] {{
+        background-color: {COLORS['bg']} !important;
+        border-right: 1px solid {COLORS['border']} !important;
+    }}
+    
+    section[data-testid="stSidebar"] .stMarkdown,
+    section[data-testid="stSidebar"] .stMarkdown p,
+    section[data-testid="stSidebar"] .stMarkdown span,
+    section[data-testid="stSidebar"] .stMarkdown div {{
+        color: {COLORS['text']} !important;
+    }}
+    
+    section[data-testid="stSidebar"] .stSelectbox > div > div {{
+        background-color: {COLORS['surface']} !important;
+        border-color: {COLORS['border']} !important;
+        color: {COLORS['text']} !important;
+    }}
+    
+    section[data-testid="stSidebar"] .stSlider > div > div {{
+        color: {COLORS['blue']} !important;
+    }}
+    
+    section[data-testid="stSidebar"] hr {{
+        border-color: {COLORS['border']} !important;
+    }}
+    
     /* Hero section */
     .hero-title {{
         font-size: {FONT_SIZES['title']}px;
@@ -165,7 +192,6 @@ st.markdown(f"""
     }}
 </style>
 """, unsafe_allow_html=True)
-
 # ============================================================================
 # LOAD DATA FOR STATS
 # ============================================================================
